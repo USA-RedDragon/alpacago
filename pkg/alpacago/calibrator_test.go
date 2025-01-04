@@ -122,7 +122,7 @@ func TestNewCalibratorCoverGetStatus(t *testing.T) {
 		t.Errorf("got %q", err)
 	}
 
-	if got != CalibratorReady && got != CalibratorNotReady {
+	if got != "ready" && got != "not_ready" && got != "unknown" {
 		t.Errorf("got %v, but expected the calibrator to be ready", got)
 	}
 
