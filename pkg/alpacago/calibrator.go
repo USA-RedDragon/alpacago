@@ -24,6 +24,19 @@ const (
 	CalibratorError
 )
 
+func (s CalibratorState) String() string {
+	name := []string{"not_present", "off", "not_ready", "ready", "unknown", "error"}
+
+	i := uint8(s)
+
+	switch {
+	case i <= uint8(Error):
+		return name[i]
+	default:
+		return strconv.Itoa(int(i))
+	}
+}
+
 const (
 	// This device does not have a cover that can be closed independently
 	CoverNotPresent CoverState = iota
@@ -115,9 +128,9 @@ GetStatus()
 @see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__calibratorstate
 @see https://ascom-standards.org/Help/Platform/html/T_ASCOM_DeviceInterface_CalibratorStatus.htm
 */
-func (c *CoverCalibrator) GetStatus() (CalibratorState, error) {
+func (c *CoverCalibrator) GetStatus() (string, error) {
 	status, err := c.Alpaca.GetInt32Response("covercalibrator", c.DeviceNumber, "calibratorstate")
-	return CalibratorState(status), err
+	return CalibratorState(status).String(), err
 }
 
 /*
