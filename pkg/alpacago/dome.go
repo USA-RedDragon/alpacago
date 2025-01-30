@@ -75,6 +75,16 @@ func (d *Dome) SetConnected(connected bool) error {
 }
 
 /*
+GetDescription() common method to all ASCOM Alpaca compliant devices
+
+@returns the description of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
+*/
+func (d *Dome) GetDescription() (string, error) {
+	return d.Alpaca.GetDescription("dome", d.DeviceNumber)
+}
+
+/*
 GetAltitude()
 
 @returns The dome altitude (degrees, horizon zero and increasing positive to 90 zenith).

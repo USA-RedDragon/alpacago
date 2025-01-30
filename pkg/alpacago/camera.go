@@ -101,6 +101,16 @@ func (c *Camera) SetConnected(connected bool) error {
 }
 
 /*
+GetDescription() common method to all ASCOM Alpaca compliant devices
+
+@returns the description of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
+*/
+func (c *Camera) GetDescription() (string, error) {
+	return c.Alpaca.GetDescription("camera", c.DeviceNumber)
+}
+
+/*
 GetBayerOffsetX()
 
 @returns the X offset of the Bayer matrix, as defined in SensorType.

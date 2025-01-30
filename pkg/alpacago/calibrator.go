@@ -112,6 +112,16 @@ func (c *CoverCalibrator) SetConnected(connected bool) error {
 }
 
 /*
+GetDescription() common method to all ASCOM Alpaca compliant devices
+
+@returns the description of the device
+@see https://ascom-standards.org/api/#/ASCOM%20Methods%20Common%20To%20All%20Devices/get__device_type___device_number__description
+*/
+func (c *CoverCalibrator) GetDescription() (string, error) {
+	return c.Alpaca.GetDescription("covercalibrator", c.DeviceNumber)
+}
+
+/*
 GetBrightness()
 
 @returns the current calibrator brightness in the range 0 (completely off) to MaxBrightness (fully on)
